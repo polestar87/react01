@@ -1,32 +1,25 @@
 import React, { Fragment, useState } from "react";
-import Nav from "./component/nav";
-import Home from "./views/home";
-import About from "./views/about";
-import List from "./views/list";
-import View404 from "./views/404";
-import { Route, Switch, Redirect } from "react-router-dom";
-import { routers } from "./router/route";
-/* 
-  Switch 中，当其中一项匹配成功之后，则不在向下匹配
+import { Button } from "antd";
+import { routes } from "./router";
+import {Route, Switch} from "react-router-dom";
 
-*/
-// 组件间通信
 function App() {
   const [user, setUser] = useState("");
   return (
     <Fragment>
-      <Nav />
+      {/* <Button type="primary">Primary Button</Button> */}
       <Switch>
-        {routers.map((item) => {
+        {routes.map((item, index) => {
           return (
             <Route
-              key={item.id}
+              key={index}
               exact={item.exact}
               path={item.path}
-              render={(rourerProps) => {
-                return item.render({ ...rourerProps, user });
+              render={(props) => {
+                return item.render(props);
               }}
-            ></Route>
+
+            />
           );
         })}
       </Switch>
